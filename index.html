@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DZ Predictions | منصة التوقعات الكروية والتحليلات الرياضية الحصرية</title>
+  
+  <!-- استيراد خط القاهرة الجميل والرياضي للمظاهر الممتازة -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- ربط ملف الاستايل الخارجي المتوافق بالكامل مع الهواتف الذكية -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- القائمة العلوية للهيدر الممتاز للتنقل والفلترة المكتملة -->
+  <header>
+    <div class="header-container">
+      <div class="logo-section">
+        <!-- أيقونة كروية ذهبية للتألق -->
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.4));">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          <path d="M2 12h20"></path>
+        </svg>
+        <div>
+          <h1 style="display: inline-block; vertical-align: middle;">DZ Predictions</h1>
+          <span style="display: inline-block; vertical-align: middle; margin-right: 8px;">توقعات VIP 🚀</span>
+        </div>
+      </div>
+      
+      <!-- حاوية أزرار الفلترة حسب الدوري - سيتم ملؤها ديناميكياً بواسطة الجافاسكريبت -->
+      <div class="filter-wrapper" id="filter-container">
+        <!-- أزرار الفلترة سيتم حقنها ديناميكياً -->
+      </div>
+    </div>
+  </header>
+
+  <!-- المحتوى الرئيسي للمنصة وتوزيع المباريات والاشتراكات -->
+  <main>
+    
+    <!-- لافتة الإحصائيات السريعة لتحديثات اليوم المباشرة -->
+    <div class="stats-banner" id="stats-banner-id">
+      <div class="stat-item" id="stat-matches">
+        <div class="stat-value" id="total-matches-count">31</div>
+        <div class="stat-label">المباريات المسجلة</div>
+      </div>
+      <div class="stat-item" id="stat-vip">
+        <div class="stat-value" id="vip-matches-count" style="color: #fbbf24">8</div>
+        <div class="stat-label">توقعات VIP مغلقة</div>
+      </div>
+      <div class="stat-item" id="stat-leagues">
+        <div class="stat-value" id="leagues-count" style="color: #3b82f6">5</div>
+        <div class="stat-label">الدوريات المتاحة</div>
+      </div>
+    </div>
+
+    <!-- بطاقة إدخال كود التفعيل الخاص بي VIP الصالح (صندوق تفعيل الكود للعملاء) -->
+    <section class="activation-card" id="activation-block">
+      <div class="activation-header">
+        <span class="activation-icon">⭐</span>
+        <h2 class="activation-title">دخول كود التفعيل الخاص بي VIP</h2>
+      </div>
+      <p class="activation-desc">
+        أدخل الكود السنوي لتفعيل جميع ميزات الـ VIP المفتوحة تلقائياً فوراً والاستمتاع بـ 14 تفصيلاً رياضياً حاسماً (توقع شحال هدف أو بطاقات أو ركنيات في الشوط الأول والشوط الثاني واللقاء كامل، شكون يمركي لول والفرصة المزدوجة)!
+      </p>
+      
+      <form class="activation-form" onsubmit="return false;">
+        <input 
+          type="text" 
+          id="activation-input" 
+          class="activation-input" 
+          placeholder="أدخل كود تفعيل VIP السنوي الخاص بك هنا (مثال: ATAI-1112-WQLQ)"
+          autocomplete="off"
+        >
+        <button type="submit" id="activation-submit" class="activation-submit">
+          تفعيل الحساب الآن ⚡
+        </button>
+      </form>
+
+      <!-- تنبيهات جافاسكريبت المباشرة لكود التفعيل -->
+      <div id="activation-error" class="alert alert-error"></div>
+      <div id="activation-success" class="alert alert-success"></div>
+    </section>
+
+
+
+    <!-- حاوية المباريات والتواريخ - يتم حقن محتواها بالـ JavaScript -->
+    <div id="matches-container">
+      <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+        ⚽ جاري تحميل المباريات والتحليلات الحية لـ DZ Predictions...
+      </div>
+    </div>
+
+    <!-- 🏆 أسعار باقات اشتراك VIP المضمونة للعملاء 🏆 -->
+    <section class="plans-section" id="plans-id">
+      <div class="section-title">
+        <h2>🔥 باقات اشتراك VIP الممتازة</h2>
+        <p>اختر الباقة المناسبة لك لتفعيل خادم التوقعات المضمون ودعم مسيرة المنصة بالجزائر</p>
+      </div>
+
+      <div class="plans-grid">
+        <!-- الباقة اليومية -->
+        <div class="plan-card">
+          <div class="plan-icon">⚡</div>
+          <h3 class="plan-type">اشتراك يومي</h3>
+          <div class="plan-price-cents">20 الف</div>
+          <span class="plan-price-da">200 دج</span>
+          <p class="plan-duration">صلاحية لمدة 24 ساعة كاملة</p>
+          <ul class="plan-features">
+            <li>فتح توقعات مباريات اليوم كاملة</li>
+            <li>تحليلات الشوطين والأهداف</li>
+            <li>ركنيات وبطاقات ملخصة</li>
+          </ul>
+          <a href="#payment-id" class="plan-btn">شراء الآن 💳</a>
+        </div>
+
+        <!-- الباقة الأسبوعية -->
+        <div class="plan-card">
+          <div class="plan-icon">📅</div>
+          <h3 class="plan-type">اشتراك أسبوعي</h3>
+          <div class="plan-price-cents">100 الف</div>
+          <span class="plan-price-da">1,000 دج</span>
+          <p class="plan-duration">صلاحية لمدة 7 أيام متتالية</p>
+          <ul class="plan-features">
+            <li>فتح جميع المباريات الـ VIP</li>
+            <li>تحديثات نتائج الشوط الأول ملخصة</li>
+            <li>بطاقات وركنيات الشوطين بدقة</li>
+            <li>توفير 30% مقارنة باليومي</li>
+          </ul>
+          <a href="#payment-id" class="plan-btn">شراء الآن 💳</a>
+        </div>
+
+        <!-- الباقة الشهرية -->
+        <div class="plan-card popular">
+          <div class="plan-icon">💎</div>
+          <h3 class="plan-type">اشتراك شهري</h3>
+          <div class="plan-price-cents">250 الف</div>
+          <span class="plan-price-da">2,500 دج</span>
+          <p class="plan-duration">صلاحية لمدة 31 يوماً كاملاً</p>
+          <ul class="plan-features">
+            <li>أكثر الباقات طلباً وتوفيراً</li>
+            <li>تحليلات شاملة لـ 14 تفصيل للـ VIP</li>
+            <li>كود تفعيل يصدر فور تأكيد الدفع</li>
+            <li>دعم فني خاص على مدار الساعة</li>
+          </ul>
+          <a href="#payment-id" class="plan-btn">شراء الآن 🔥</a>
+        </div>
+
+        <!-- الباقة السنوية الأقوى -->
+        <div class="plan-card" style="border: 1px solid rgba(59, 130, 246, 0.3);">
+          <div class="plan-icon">👑</div>
+          <h3 class="plan-type" style="color: #3b82f6;">اشتراك سنوي كامل</h3>
+          <div class="plan-price-cents">مليون و 50</div>
+          <span class="plan-price-da">10,500 دج (توفير 65%)</span>
+          <p class="plan-duration">صلاحية لمدة 365 يوماً كاملاً</p>
+          <ul class="plan-features">
+            <li>فتح التوقعات طوال العام الحالي والأولمك</li>
+            <li>كود تفعيل شخصي VIP منفرد ومؤمن</li>
+            <li>يشمل دوري أبطال أوروبا وكأس العالم</li>
+            <li>هدية مجانية: استشارات تكتيكية خاصة</li>
+          </ul>
+          <a href="#payment-id" class="plan-btn" style="background-color: #3b82f6; border: none;">شراء الباقة الكبرى 👑</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 💳 طرق دفع آمنة وسهلة للجمهور الجزائري 💳 -->
+    <section class="payment-section" id="payment-id">
+      <div class="section-title">
+        <h2>💳 طرق الدفع المدعومة بالجزائر</h2>
+        <p>بعد إتمام عملية الدفع لإحدى الباقات، أرسل الإثبات لمطور الموقع بالتلغرام لتحصل على كود التفعيل VIP الفوري</p>
+      </div>
+
+      <div class="payment-grid">
+        <!-- بريدي موب -->
+        <div class="payment-card" style="border-right: 4px solid #fbbf24;">
+          <div class="payment-card-header">
+            <span class="payment-card-logo">📱</span>
+            <div>
+              <h3 class="payment-card-title">تطبيق بريدي موب (BaridiMob)</h3>
+              <p class="payment-card-subtitle">التحويل الفوري عبر البريد السريع</p>
+            </div>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label">رقم الـ RIP:</span>
+            <span class="payment-value" id="rip-value">00799999002244668811</span>
+            <button class="copy-btn" onclick="copyToClipboard('rip-value', this)">📋 نسخ رقم الـ RIP</button>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label">الاسم الكامل:</span>
+            <span class="payment-value" id="rip-name">TALAL BELHEROUS</span>
+            <button class="copy-btn" onclick="copyToClipboard('rip-name', this)">📋 نسخ الاسم</button>
+          </div>
+        </div>
+
+        <!-- CCP البريد الجزائري -->
+        <div class="payment-card" style="border-right: 4px solid #10b981;">
+          <div class="payment-card-header">
+            <span class="payment-card-logo">✉</span>
+            <div>
+              <h3 class="payment-card-title">الحساب البريدي الجاري (CCP)</h3>
+              <p class="payment-card-subtitle">الدفع في مكاتب بريد الجزائر</p>
+            </div>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label">رقم الحساب الحاري (CCP):</span>
+            <span class="payment-value" id="ccp-num">24681357</span>
+            <button class="copy-btn" onclick="copyToClipboard('ccp-num', this)">📋 نسخ رقم CCP</button>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label">المفتاح (Clé):</span>
+            <span class="payment-value" id="ccp-key">37</span>
+            <button class="copy-btn" onclick="copyToClipboard('ccp-key', this)">📋 نسخ المفتاح</button>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label">الاسم الكامل بالعربية:</span>
+            <span class="payment-value" id="ccp-arabic-name">طلال بلحروس</span>
+            <button class="copy-btn" onclick="copyToClipboard('ccp-arabic-name', this)">📋 نسخ الاسم بالعربية</button>
+          </div>
+        </div>
+
+        <!-- Redotepay -->
+        <div class="payment-card" style="border-right: 4px solid #ef4444;">
+          <div class="payment-card-header">
+            <span class="payment-card-logo">🔴</span>
+            <div>
+              <h3 class="payment-card-title">بطاقة Redotepay</h3>
+              <p class="payment-card-subtitle">التحويل الإلكتروني والدولار المباشر</p>
+            </div>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label">معرف الحساب (Redotepay ID):</span>
+            <span class="payment-value" id="redotepay-id">8877665544</span>
+            <button class="copy-btn" onclick="copyToClipboard('redotepay-id', this)">📋 نسخ المعرف ID</button>
+          </div>
+        </div>
+
+        <!-- Binance -->
+        <div class="payment-card" style="border-right: 4px solid #fbbf24;">
+          <div class="payment-card-header">
+            <span class="payment-card-logo">🟡</span>
+            <div>
+              <h3 class="payment-card-title">منصة بايننس (Binance USDT)</h3>
+              <p class="payment-card-subtitle">دفع بالعملات الرقمية USDT المستقر</p>
+            </div>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label">Binance Pay ID:</span>
+            <span class="payment-value" id="binance-pay-id">3737373737</span>
+            <button class="copy-btn" onclick="copyToClipboard('binance-pay-id', this)">📋 نسخ الـ Pay ID</button>
+          </div>
+          <div class="payment-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+            <div style="display: flex; justify-content: space-between; width: 100%;">
+              <span class="payment-label">رابط محفظة USDT (Network TRC-20):</span>
+              <button class="copy-btn" onclick="copyToClipboard('usdt-wallet', this)">📋 نسخ المحفظة</button>
+            </div>
+            <span class="payment-value" id="usdt-wallet" style="word-break: break-all; font-size: 11px; margin-top: 2px;">TY92Hsh982JKshdf783KShdb676vHShskd</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- الفوتر الختامي والتنبيهات -->
+  <footer>
+    <p>© 2026 جميع الحقوق محفوظة لمنصة <strong style="color:#10b981">DZ Predictions</strong></p>
+    <p style="margin-top: 5px; color: var(--text-secondary)">تحليلات رياضية مدروسة بدقة وتوقعات كروية عالمية ومحلية مستمرة.</p>
+  </footer>
+
+  <!-- النافذة المنبثقة الرياضية - Telegram Popup Modal (لخطوة تفاعلية التليجرام) -->
+  <div class="modal-overlay" id="telegram-modal">
+    <div class="modal-content">
+      <button class="modal-close" id="close-modal">×</button>
+      <div class="modal-icon">⭐</div>
+      
+      <h3 class="modal-title" id="modal-match-title">توقعات الـ VIP المغلقة</h3>
+      <p class="modal-desc">أهلاً بك بكروياتنا الذهبية! للاطلاع على الـ 14 توقع والتحليلات الحصرية لهذه المباراة، يرجى تفعيل حسابك عن طريق إدخال كود التفعيل VIP بالصندوق العلوي، أو التواصل الفوري مع المطور "طلال" بالتلغرام للاشتراك السريع:</p>
+      
+      <div class="telegram-steps">
+        <!-- الخطوة الأولى: الاشتراك بقناة التلجرام -->
+        <button class="step-btn step-1-btn" id="sub-channel-btn">
+          1️⃣ أولاً: اضغط هنا للاشتراك في قناتنا على التلجرام الرسمية 🔗
+        </button>
+        
+        <!-- الخطوة الثانية: التوجه لدعم مطور التطبيق لشراء الكود أو الاستفسار -->
+        <button class="step-btn btn-normal" id="view-prediction-btn" style="opacity: 0.5; cursor: not-allowed;">
+          2️⃣ ثانياً: تواصل فوراً مع طلال لشراء كود التنشيط VIP 📊
+        </button>
+      </div>
+      
+      <p style="font-size: 11px; color: var(--text-secondary); margin-top: 10px;">💡 ملاحظة: بعد الضغط على زر الاشتراك بالخطوة الأولى، سيتم تلقائياً فتح زر التوجيه للتواصل بالخطوة الثانية!</p>
+    </div>
+  </div>
+
+  <!-- تفعيل محرك الجافاسكريبت والمباريات بالتسلسل الصحيح -->
+  <script src="/data.js"></script>
+  <script src="/script.js"></script>
+</body>
+</html>
